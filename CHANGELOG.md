@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.1 (2021-04-11)
+
+
+### Features
+
+* **http-logger:** first implementation ([9643c9a](https://github.com/MapColonies/express-access-log-middleware/commit/9643c9a8b80b40e9635bbbcf639cf50961658305))
+
 ## 1.1.0 (2021-01-04)
 
 
