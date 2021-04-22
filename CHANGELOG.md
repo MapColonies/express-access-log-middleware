@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/MapColonies/express-access-log-middleware/compare/v0.0.1...v0.0.2) (2021-04-22)
+
+
+### Bug Fixes
+
+* **deps:** exposed types ([#2](https://github.com/MapColonies/express-access-log-middleware/issues/2)) ([3a352c2](https://github.com/MapColonies/express-access-log-middleware/commit/3a352c2cc458def4a068841da2fae82db1468a05))
+
 ### 0.0.1 (2021-04-11)
 
 
