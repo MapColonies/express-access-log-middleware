@@ -13,7 +13,7 @@ describe('#httpLogger', function () {
 
   beforeAll(function () {
     writableStream = new Writable();
-    logger = pino({formatters:{level: (label) => ({level: label})}},writableStream);
+    logger = pino({ formatters: { level: (label) => ({ level: label }) } }, writableStream);
     controllerFn = jest.fn();
     expressApp = express();
     expressApp.use(httpLogger({ logger }));
