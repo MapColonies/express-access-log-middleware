@@ -29,7 +29,7 @@ for more detailed usage check the [pino-http documentation](https://github.com/p
 |---|---|---|---|
 logger| Logger | | The logger instance to use
 ignorePaths| string[] | undefined | The paths to ignore logging
-useLevel | string | info| The level to use while logging
+customLogLevel | (res, err) => log_level | info for all under 500 status | A function to set the log level of a request
 customSuccessMessage | (res: ServerResponse) => string| undefined | function to set the success message
 customErrorMessage | (error: Error, res: ServerResponse) => string| undefined | function to set the success message
 
