@@ -9,16 +9,19 @@ describe('#httpLogger', function () {
   let writableStream: Writable;
   let logger: Logger;
   let expressApp: Application;
-  // let logMethod: jest.Mock;
   let controllerFn: jest.Mock;
 
   beforeAll(function () {
     writableStream = new Writable();
-    logger = pino(writableStream);
+    logger = pino({ formatters: { level: (label) => ({ level: label }) } }, writableStream);
     controllerFn = jest.fn();
     expressApp = express();
     expressApp.use(httpLogger({ logger }));
     expressApp.use('/avi', controllerFn);
+  });
+
+  beforeEach(function () {
+    controllerFn.mockReset();
   });
   it('should log an OK message', async function () {
     controllerFn.mockImplementationOnce((req: Request, res: Response) => {
@@ -28,9 +31,8 @@ describe('#httpLogger', function () {
     writableStream._write = (chunk, encoding, next) => {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
-      console.log(loggedObject);
 
-      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 } });
+      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info' });
       next();
     };
 
@@ -47,7 +49,7 @@ describe('#httpLogger', function () {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
 
-      expect(loggedObject).toMatchObject({ msg: 'request errored', res: { statusCode: 500 } });
+      expect(loggedObject).toMatchObject({ msg: 'request errored', res: { statusCode: 500 }, level: 'error' });
       next();
     };
 
