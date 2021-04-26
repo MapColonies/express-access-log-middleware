@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/MapColonies/express-access-log-middleware/compare/v0.0.2...v0.0.3) (2021-04-26)
+
+
+### Features
+
+* **http-logger:** added support for dynamic log level ([751c2d3](https://github.com/MapColonies/express-access-log-middleware/commit/751c2d38360f8764fd5d57e522b9d13eb8cd1a9b))
+* **http-logger:** added support for dynamic log level ([#3](https://github.com/MapColonies/express-access-log-middleware/issues/3)) ([b409172](https://github.com/MapColonies/express-access-log-middleware/commit/b409172d6d125a3f2ec92b7952314f21eb710183))
+
 ### [0.0.2](https://github.com/MapColonies/express-access-log-middleware/compare/v0.0.1...v0.0.2) (2021-04-22)
 
 
