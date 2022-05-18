@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/MapColonies/express-access-log-middleware/compare/v0.0.3...v0.1.0) (2022-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** upgrade pino-http (#4)
+
+### build
+
+* **deps:** upgrade pino-http ([#4](https://github.com/MapColonies/express-access-log-middleware/issues/4)) ([140603a](https://github.com/MapColonies/express-access-log-middleware/commit/140603a0220fb739952f870fdbf61b8fdb0cfb71))
+
 ### [0.0.3](https://github.com/MapColonies/express-access-log-middleware/compare/v0.0.2...v0.0.3) (2021-04-26)
 
 
