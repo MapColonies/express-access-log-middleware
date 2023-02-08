@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: express-access-log-middleware
-  description: A package for initializing opentelmetry collectors
+  description: A middleware for access logging in express
   annotations:
     github.com/project-slug: MapColonies/express-access-log-middleware
   tags: 
