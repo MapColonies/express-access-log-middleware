@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/MapColonies/express-access-log-middleware/compare/v1.0.0...v2.0.0) (2023-04-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgraded pino-http version and added ignore option (#6)
+* upgraded pino-http version and added ignore option
+
+### Features
+
+* added backstage docs ([780d6db](https://github.com/MapColonies/express-access-log-middleware/commit/780d6db91ccc90fb9cf39fb1723e30cad3f2da48))
+* upgraded pino-http version and added ignore option ([0ed03f6](https://github.com/MapColonies/express-access-log-middleware/commit/0ed03f6c525a97560a592967a030643090ed9d30))
+* upgraded pino-http version and added ignore option ([#6](https://github.com/MapColonies/express-access-log-middleware/issues/6)) ([40c2bfb](https://github.com/MapColonies/express-access-log-middleware/commit/40c2bfb8cd9c56be20d6f5ab8076ffc817808723))
+
+
+### Bug Fixes
+
+* backstage description ([0950cd1](https://github.com/MapColonies/express-access-log-middleware/commit/0950cd117a86f2382723302d80c6c9de9e209baa))
+
 ## [1.0.0](https://github.com/MapColonies/express-access-log-middleware/compare/v0.1.0...v1.0.0) (2022-05-18)
 
 ## [0.1.0](https://github.com/MapColonies/express-access-log-middleware/compare/v0.0.3...v0.1.0) (2022-05-18)
