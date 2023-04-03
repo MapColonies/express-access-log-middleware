@@ -56,4 +56,67 @@ describe('#httpLogger', function () {
     await supertest.agent(expressApp).get('/avi');
     expect.assertions(1);
   });
+
+  it('should ignore messages on ignored paths', async function () {
+    const customExpressApp = express();
+    customExpressApp.use(httpLogger({ logger, ignorePaths: ['/ignored'] }));
+    customExpressApp.use('/avi', controllerFn);
+    controllerFn.mockImplementationOnce((req: Request, res: Response) => {
+      res.json({ hello: 'avi' });
+    });
+
+    writableStream._write = (chunk, encoding, next) => {
+      // eslint-disable-next-line
+      const loggedObject = JSON.parse(chunk.toString());
+
+      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info', req: { url: '/avi' } });
+      next();
+    };
+
+    await supertest.agent(customExpressApp).get('/avi');
+    await supertest.agent(customExpressApp).get('/ignored');
+    expect.assertions(1);
+  });
+
+  it('should ignore messages on ignored paths regex', async function () {
+    const customExpressApp = express();
+    customExpressApp.use(httpLogger({ logger, ignorePaths: [/.*ignored.*/] }));
+    customExpressApp.use('/avi', controllerFn);
+    controllerFn.mockImplementationOnce((req: Request, res: Response) => {
+      res.json({ hello: 'avi' });
+    });
+
+    writableStream._write = (chunk, encoding, next) => {
+      // eslint-disable-next-line
+      const loggedObject = JSON.parse(chunk.toString());
+
+      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info', req: { url: '/avi' } });
+      next();
+    };
+
+    await supertest.agent(customExpressApp).get('/avi');
+    await supertest.agent(customExpressApp).get('/ignored');
+    expect.assertions(1);
+  });
+
+  it('should ignore messages if ignore is supplied', async function () {
+    const customExpressApp = express();
+    customExpressApp.use(httpLogger({ logger, ignore: () => true }));
+    customExpressApp.use('/avi', controllerFn);
+    controllerFn.mockImplementationOnce((req: Request, res: Response) => {
+      res.json({ hello: 'avi' });
+    });
+
+    writableStream._write = (chunk, encoding, next) => {
+      // eslint-disable-next-line
+      const loggedObject = JSON.parse(chunk.toString());
+
+      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info', req: { url: '/avi' } });
+      next();
+    };
+
+    await supertest.agent(customExpressApp).get('/avi');
+    await supertest.agent(customExpressApp).get('/ignored');
+    expect.assertions(0);
+  });
 });
