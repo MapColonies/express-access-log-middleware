@@ -1,5 +1,5 @@
 import { Writable } from 'stream';
-import * as express from 'express';
+import express from 'express';
 import { Application, NextFunction, Request, Response } from 'express';
 import * as supertest from 'supertest';
 import pino, { Logger } from 'pino';
