@@ -20,9 +20,9 @@
     "prebuild": "npm run clean",
     "build": "tsc --project tsconfig.build.json",
     "start": "npm run build && cd dist && node ./index.js",
-    "install": "npx husky install",
     "clean": "rimraf dist",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
