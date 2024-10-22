@@ -44,5 +44,5 @@ const httpLogger = (options?: Options): HttpLogger => {
   return pinoHttp(httpOptions);
 };
 
-export { Options };
+export type { Options };
 export default httpLogger;
