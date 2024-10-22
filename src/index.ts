@@ -4,7 +4,7 @@ import { Logger } from 'pino';
 
 type Options = { logger: Logger; ignorePaths?: (string | RegExp)[]; ignore?: AutoLoggingOptions['ignore'] } & Pick<
   PinoHttpOptions,
-  'customLogLevel' | 'customErrorMessage' | 'customSuccessMessage'
+  'customLogLevel' | 'customErrorMessage' | 'customSuccessMessage' | 'customSuccessObject' | 'customErrorObject'
 >;
 
 const ignorePathFunc = (ignoredPaths: (string | RegExp)[]): AutoLoggingOptions['ignore'] => {
