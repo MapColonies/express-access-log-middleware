@@ -31,5 +31,8 @@ logger| Logger | | The logger instance to use
 ignorePaths| string[] | undefined | The paths to ignore logging
 customLogLevel | (res, err) => log_level | info for all under 500 status | A function to set the log level of a request
 customSuccessMessage | (res: ServerResponse) => string| undefined | function to set the success message
-customErrorMessage | (error: Error, res: ServerResponse) => string| undefined | function to set the success message
+customSuccessObject | (req: IncomingMessage, res: ServerResponse, val: any) => object | undefined | function to set the success object
+customErrorMessage | (error: Error, res: ServerResponse) => string| undefined | function to set the error message
+customErrorObject | (req: IncomingMessage, res: ServerResponse, error: Error) => object | undefined | function to set the error object
+
 
