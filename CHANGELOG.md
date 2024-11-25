@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/MapColonies/express-access-log-middleware/compare/v2.0.1...v3.0.0) (2024-11-25)
+
+
+### Features
+
+* added option to configure custom success and error objects ([#10](https://github.com/MapColonies/express-access-log-middleware/issues/10)) ([ebc01cc](https://github.com/MapColonies/express-access-log-middleware/commit/ebc01cc1b0f37ff84436cab20cc941eaae8a8923))
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([76f2adb](https://github.com/MapColonies/express-access-log-middleware/commit/76f2adbcf0154e0bfff8871311f3cfc7e89f84fa))
+
 ### [2.0.1](https://github.com/MapColonies/express-access-log-middleware/compare/v2.0.0...v2.0.1) (2023-04-04)
 
 ## [2.0.0](https://github.com/MapColonies/express-access-log-middleware/compare/v1.0.0...v2.0.0) (2023-04-03)
