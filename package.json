@@ -1,6 +1,6 @@
 {
   "name": "@map-colonies/express-access-log-middleware",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "An access and error logger for express based on pino-http",
   "main": "./dist/index.js",
   "exports": {
