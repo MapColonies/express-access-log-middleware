@@ -43,6 +43,8 @@ jobs:
         
       - name: Init nodejs
         uses: ./.github/actions/init-npm
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Run tests
         run: npm run test
