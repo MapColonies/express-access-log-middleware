@@ -2,36 +2,43 @@ import { pinoHttp, Options as PinoHttpOptions, HttpLogger, AutoLoggingOptions } 
 import statusCodes from 'http-status-codes';
 import { Logger } from 'pino';
 
-type Prettify<T> = {
-  [K in keyof T]: T[K];
-  // eslint-disable-next-line @typescript-eslint/ban-types
-} & {};
-
 /**
  * Options for configuring the access log middleware.
- * @property customLogLevel - Custom function to determine log level based on request, response and error.
- * @property {PinoHttpOptions['customErrorMessage']} [customErrorMessage] - Custom function to generate error messages.
- * @property {PinoHttpOptions['customSuccessMessage']} [customSuccessMessage] - Custom function to generate success messages.
- * @property {PinoHttpOptions['customSuccessObject']} [customSuccessObject] - Custom function to modify the success log object.
- * @property {PinoHttpOptions['customErrorObject']} [customErrorObject] - Custom function to modify the error log object.
- * @interface
  */
-type Options = Prettify<
-  {
-    /**
-     * A Logger instance used for logging requests and responses.
-     */
-    logger: Logger;
-    /**
-     * Array of paths or regular expressions to ignore from logging.
-     */
-    ignorePaths?: (string | RegExp)[];
-    /**
-     * Custom ignore options for automatic logging.
-     */
-    ignore?: AutoLoggingOptions['ignore'];
-  } & Pick<PinoHttpOptions, 'customLogLevel' | 'customErrorMessage' | 'customSuccessMessage' | 'customSuccessObject' | 'customErrorObject'>
->;
+interface Options {
+  /**
+   * A Logger instance used for logging requests and responses.
+   */
+  logger: Logger;
+  /**
+   * Array of paths or regular expressions to ignore from logging.
+   */
+  ignorePaths?: (string | RegExp)[];
+  /**
+   * Custom ignore options for automatic logging.
+   */
+  ignore?: AutoLoggingOptions['ignore'];
+  /**
+   * Custom function to determine log level based on request, response and error.
+   */
+  customLogLevel?: PinoHttpOptions['customLogLevel'];
+  /**
+   * Custom function to generate error messages.
+   */
+  customErrorMessage?: PinoHttpOptions['customErrorMessage'];
+  /**
+   * Custom function to generate success messages.
+   */
+  customSuccessMessage?: PinoHttpOptions['customSuccessMessage'];
+  /**
+   * Custom function to modify the success log object.
+   */
+  customSuccessObject?: PinoHttpOptions['customSuccessObject'];
+  /**
+   * Custom function to modify the error log object.
+   */
+  customErrorObject?: PinoHttpOptions['customErrorObject'];
+}
 
 const ignorePathFunc = (ignoredPaths: (string | RegExp)[]): AutoLoggingOptions['ignore'] => {
   return (req) => {
