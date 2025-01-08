@@ -1,6 +1,6 @@
 module.exports = {
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': '@swc/jest',
   },
   testMatch: ['<rootDir>/tests/**/*.spec.ts'],
   collectCoverage: true,
@@ -8,7 +8,6 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   coverageReporters: ['text-summary', 'html', 'json'],
   rootDir: '../../.',
-  preset: 'ts-jest',
   testEnvironment: 'node',
   reporters: [
     'default',
