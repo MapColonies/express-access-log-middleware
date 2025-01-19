@@ -11,6 +11,8 @@ updates:
     allow:
       - dependency-type: production
     directory: /
+    labels:
+      - 'infra'
     commit-message:
       prefix: 'deps'
     groups:
@@ -31,6 +33,8 @@ updates:
     allow:
       - dependency-type: development
     directory: /
+    labels:
+      - 'infra'
     commit-message:
       prefix: 'deps'
     reviewers:
@@ -54,6 +58,8 @@ updates:
   - package-ecosystem: github-actions
     schedule:
       interval: weekly
+    labels:
+      - 'infra'
     commit-message:
       prefix: 'ci'
     directory: '/'
