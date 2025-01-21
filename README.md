@@ -30,14 +30,15 @@ for more detailed usage check the [pino-http documentation](https://github.com/p
 ###
 
 ## Configuration
-| name |type| default value | description
+| name | type | default value | description |
 |---|---|---|---|
-logger| Logger | | The logger instance to use
-ignorePaths| string[] | undefined | The paths to ignore logging
-customLogLevel | (res, err) => log_level | info for all under 500 status | A function to set the log level of a request
-customSuccessMessage | (res: ServerResponse) => string| undefined | function to set the success message
-customSuccessObject | (req: IncomingMessage, res: ServerResponse, val: any) => object | undefined | function to set the success object
-customErrorMessage | (error: Error, res: ServerResponse) => string| undefined | function to set the error message
-customErrorObject | (req: IncomingMessage, res: ServerResponse, error: Error) => object | undefined | function to set the error object
+| logger | Logger | required | The logger instance used for logging requests and responses |
+| ignorePaths | (string \| RegExp)[] | undefined | Array of paths or regular expressions to ignore from logging |
+| ignore | AutoLoggingOptions['ignore'] | undefined | Custom ignore options for automatic logging |
+| customLogLevel | (req, res, err) => LogLevel | error for >=400, info otherwise | Custom function to determine log level based on request, response and error |
+| customSuccessMessage | (res: ServerResponse) => string | undefined | Custom function to generate success messages |
+| customSuccessObject | (req: IncomingMessage, res: ServerResponse, val: any) => object | undefined | Custom function to modify the success log object |
+| customErrorMessage | (error: Error, res: ServerResponse) => string | undefined | Custom function to generate error messages |
+| customErrorObject | (req: IncomingMessage, res: ServerResponse, error: Error) => object | undefined | Custom function to modify the error log object |
 
 
