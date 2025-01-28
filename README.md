@@ -16,7 +16,7 @@ const app = express()
 
 const logger = jsLogger();
 
-app.use(jsLogger({logger}));
+app.use(httpLogger({logger}));
 
 app.get('/', (req,res) => {
   res.json({hello: 'world'});
