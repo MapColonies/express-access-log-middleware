@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.1](https://github.com/MapColonies/express-access-log-middleware/compare/v3.0.0...v3.0.1) (2025-02-03)
+
+
+### Dependency Updates
+
+* bump the dev-patch group across 1 directory with 9 updates ([#29](https://github.com/MapColonies/express-access-log-middleware/issues/29)) ([d1e48a2](https://github.com/MapColonies/express-access-log-middleware/commit/d1e48a2bec969ece452619c5629a4305e6089c4d))
+
+
+### Code Refactoring
+
+* changed Options to be explicitly defined for typedoc ([8b61c70](https://github.com/MapColonies/express-access-log-middleware/commit/8b61c70129ef83ebea797c865e95f4a5d72f31f1))
+
+
+### Build System
+
+* **deps:** bump pino-http from 10.3.0 to 10.4.0 ([#26](https://github.com/MapColonies/express-access-log-middleware/issues/26)) ([bf4986b](https://github.com/MapColonies/express-access-log-middleware/commit/bf4986be429560f95953da9a5584b7333486820a))
+* **dev-deps:** bump @commitlint/cli from 19.5.0 to 19.6.0 ([#19](https://github.com/MapColonies/express-access-log-middleware/issues/19)) ([43621a8](https://github.com/MapColonies/express-access-log-middleware/commit/43621a8f67e1fe1a86dbd28f3b9fd21714f869b3))
+
 ## [3.0.0](https://github.com/MapColonies/express-access-log-middleware/compare/v2.0.1...v3.0.0) (2024-11-25)
 
 
