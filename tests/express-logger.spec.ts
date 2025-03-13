@@ -1,8 +1,7 @@
 import { Writable } from 'stream';
-import express from 'express';
-import { Application, NextFunction, Request, Response } from 'express';
-import * as supertest from 'supertest';
-import pino, { Logger } from 'pino';
+import express, { Application, NextFunction, Request, Response } from 'express';
+import supertest from 'supertest';
+import { Logger, pino } from 'pino';
 import httpLogger from '../src';
 
 describe('#httpLogger', function () {
