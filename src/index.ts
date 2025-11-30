@@ -1,6 +1,15 @@
-import { pinoHttp, Options as PinoHttpOptions, HttpLogger, AutoLoggingOptions } from 'pino-http';
+import { IncomingMessage, ServerResponse } from 'node:http';
+import { pinoHttp, Options as PinoHttpOptions, HttpLogger, AutoLoggingOptions, stdSerializers } from 'pino-http';
 import statusCodes from 'http-status-codes';
 import { Logger } from 'pino';
+import {
+  ATTR_EXCEPTION_MESSAGE,
+  ATTR_EXCEPTION_STACKTRACE,
+  ATTR_EXCEPTION_TYPE,
+  ATTR_HTTP_REQUEST_METHOD,
+  ATTR_HTTP_RESPONSE_STATUS_CODE,
+  ATTR_URL_FULL,
+} from '@opentelemetry/semantic-conventions';
 
 /**
  * Options for configuring the access log middleware.
@@ -38,6 +47,41 @@ interface Options {
    * Custom function to modify the error log object.
    */
   customErrorObject?: PinoHttpOptions['customErrorObject'];
+}
+
+function createRequestAttributes(req: IncomingMessage, res: ServerResponse<IncomingMessage>) {
+  const serializedReq = stdSerializers.req(req);
+  const attributes: Record<string, unknown> = {
+    [ATTR_HTTP_REQUEST_METHOD]: serializedReq.method,
+    [ATTR_HTTP_RESPONSE_STATUS_CODE]: res.statusCode,
+    ['http.request.id']: serializedReq.id,
+    [ATTR_URL_FULL]: serializedReq.url,
+  };
+
+  const bannedHeaders = ['authorization', 'cookie', 'set-cookie', 'x-api-key', 'proxy-authorization', 'www-authenticate'];
+
+  Object.keys(req.headers).forEach((header) => {
+    if (!bannedHeaders.includes(header.toLowerCase())) {
+      attributes[`http.request.header.${header}`] = req.headers[header];
+    }
+  });
+
+  Object.keys(serializedReq.params).forEach((param) => {
+    attributes[`http.request.param.${param}`] = serializedReq.params[param];
+  });
+
+  Object.keys(serializedReq.query).forEach((queryParam) => {
+    if (queryParam !== 'token') {
+      attributes[`http.request.query.${queryParam}`] = serializedReq.query[queryParam];
+    }
+  });
+
+  Object.keys(res.getHeaders()).forEach((header) => {
+    if (!bannedHeaders.includes(header.toLowerCase())) {
+      attributes[`http.response.header.${header}`] = res.getHeader(header);
+    }
+  });
+  return attributes;
 }
 
 const ignorePathFunc = (ignoredPaths: (string | RegExp)[]): AutoLoggingOptions['ignore'] => {
@@ -87,8 +131,32 @@ function httpLogger(options?: Options): HttpLogger {
     ignore = ignorePathFunc(ignorePaths);
   }
 
+  const moreOptions: PinoHttpOptions = {
+    serializers: {
+      req: () => undefined,
+      res: () => undefined,
+      err: () => undefined,
+    },
+    customSuccessObject: (req, res, val: object) => {
+      const attributes: Record<string, unknown> = createRequestAttributes(req, res);
+
+      return { ...val, attributes };
+    },
+    customErrorObject: (req, res, err, val: object) => {
+      const serializedError = stdSerializers.err(err);
+      return {
+        ...val,
+        attributes: {
+          [ATTR_EXCEPTION_TYPE]: serializedError.type,
+          [ATTR_EXCEPTION_MESSAGE]: serializedError.message,
+          [ATTR_EXCEPTION_STACKTRACE]: serializedError.stack,
+        },
+      };
+    },
+  };
+
   httpOptions.autoLogging = { ignore };
-  return pinoHttp(httpOptions);
+  return pinoHttp({ ...moreOptions, ...httpOptions });
 }
 
 export type { Options };
