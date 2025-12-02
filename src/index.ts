@@ -49,7 +49,7 @@ interface Options {
   customErrorObject?: PinoHttpOptions['customErrorObject'];
 }
 
-function createRequestAttributes(req: IncomingMessage, res: ServerResponse<IncomingMessage>) {
+function createRequestAttributes(req: IncomingMessage, res: ServerResponse): Record<string, unknown> {
   const serializedReq = stdSerializers.req(req);
   const attributes: Record<string, unknown> = {
     [ATTR_HTTP_REQUEST_METHOD]: serializedReq.method,
@@ -120,7 +120,7 @@ const basePinoHttpOptions: PinoHttpOptions = {
  * ```
  */
 function httpLogger(options?: Options): HttpLogger {
-  const { ignorePaths, ...httpOptions } = { ...basePinoHttpOptions, ...options };
+  const { ignorePaths, ...httpOptions } = { ...basePinoHttpOptions, ...options, customAttributeKeys: { responseTime: 'http.response.duration' } };
   let ignore: AutoLoggingOptions['ignore'] | undefined = undefined;
 
   if (options?.ignore !== undefined) {
@@ -140,17 +140,20 @@ function httpLogger(options?: Options): HttpLogger {
     customSuccessObject: (req, res, val: object) => {
       const attributes: Record<string, unknown> = createRequestAttributes(req, res);
 
-      return { ...val, attributes };
+      return { ...val, ...attributes };
     },
     customErrorObject: (req, res, err, val: object) => {
+      const attributes: Record<string, unknown> = createRequestAttributes(req, res);
+
       const serializedError = stdSerializers.err(err);
       return {
         ...val,
-        attributes: {
-          [ATTR_EXCEPTION_TYPE]: serializedError.type,
-          [ATTR_EXCEPTION_MESSAGE]: serializedError.message,
-          [ATTR_EXCEPTION_STACKTRACE]: serializedError.stack,
-        },
+        // attributes: {
+        ...attributes,
+        [ATTR_EXCEPTION_TYPE]: serializedError.type,
+        [ATTR_EXCEPTION_MESSAGE]: serializedError.message,
+        [ATTR_EXCEPTION_STACKTRACE]: serializedError.stack,
+        // },
       };
     },
   };
