@@ -148,12 +148,10 @@ function httpLogger(options?: Options): HttpLogger {
       const serializedError = stdSerializers.err(err);
       return {
         ...val,
-        // attributes: {
         ...attributes,
         [ATTR_EXCEPTION_TYPE]: serializedError.type,
         [ATTR_EXCEPTION_MESSAGE]: serializedError.message,
         [ATTR_EXCEPTION_STACKTRACE]: serializedError.stack,
-        // },
       };
     },
   };

@@ -30,7 +30,6 @@ describe('#httpLogger', function () {
     writableStream._write = (chunk, encoding, next) => {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
-      console.log(loggedObject);
 
       expect(loggedObject).toMatchObject({ msg: 'request completed', ['http.response.status_code']: 200, level: 'info' });
       next();
