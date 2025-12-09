@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/MapColonies/express-access-log-middleware/compare/v3.0.1...v3.1.0) (2025-12-09)
+
+
+### Features
+
+* now outputs the http-log based on otlp conventions MAPCO-7953 ([#51](https://github.com/MapColonies/express-access-log-middleware/issues/51)) ([43eaaaa](https://github.com/MapColonies/express-access-log-middleware/commit/43eaaaa4758c88341444a9eba3635fec5d701c2d))
+
 ## [3.0.1](https://github.com/MapColonies/express-access-log-middleware/compare/v3.0.0...v3.0.1) (2025-02-03)
 
 
