@@ -31,13 +31,14 @@ describe('#httpLogger', function () {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
 
-      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info' });
+      expect(loggedObject).toMatchObject({ msg: 'request completed', ['http.response.status_code']: 200, level: 'info' });
       next();
     };
 
     await supertest.agent(expressApp).get('/avi');
     expect.assertions(1);
   });
+
   it('should log an error message', async function () {
     controllerFn.mockImplementationOnce((req: Request, res: Response, next: NextFunction) => {
       const err = new Error('epic failure');
@@ -48,7 +49,7 @@ describe('#httpLogger', function () {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
 
-      expect(loggedObject).toMatchObject({ msg: 'request errored', res: { statusCode: 500 }, level: 'error' });
+      expect(loggedObject).toMatchObject({ msg: 'request errored', ['http.response.status_code']: 500, level: 'error' });
       next();
     };
 
@@ -68,7 +69,7 @@ describe('#httpLogger', function () {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
 
-      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info', req: { url: '/avi' } });
+      expect(loggedObject).toMatchObject({ msg: 'request completed', ['http.response.status_code']: 200, level: 'info', ['url.full']: '/avi' });
       next();
     };
 
@@ -89,7 +90,7 @@ describe('#httpLogger', function () {
       // eslint-disable-next-line
       const loggedObject = JSON.parse(chunk.toString());
 
-      expect(loggedObject).toMatchObject({ msg: 'request completed', res: { statusCode: 200 }, level: 'info', req: { url: '/avi' } });
+      expect(loggedObject).toMatchObject({ msg: 'request completed', ['http.response.status_code']: 200, level: 'info', ['url.full']: '/avi' });
       next();
     };
 
